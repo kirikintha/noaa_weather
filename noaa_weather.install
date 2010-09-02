@@ -1,0 +1,95 @@
+<?php
+/**
+ * @file noaa_weather.install 
+ * NOAA Weather Install
+ * Version: 1.0
+ */
+
+/**
+ * Module Definitions
+ */
+define('INSTALL_MODULE_NAME', 'NOAA Custom Weather');
+
+/**
+ * Hook Requirements
+ * @internal This is where we will put the requirements for this module, so you can install it properly.
+ */
+function noaa_weather_requirements( $phase ) {
+  //Clear the requirements array.
+  $requirements = array();
+  //Switch between phases.
+  switch ( $phase ) {
+    //Install Phase.
+    case 'install':
+      break;
+    //Runtime Phase. This is where we will scan for requirements, so that they persist sitewide.
+    case 'runtime':
+      break;
+  }
+  return $requirements;
+}
+
+/**
+ * Hook Enable
+ */
+function noaa_weather_enable() {
+  //Provide a pleasant message when we install the module.
+  $output['!welcome'] = "You have successfully enabled the @name Module. Please look at the module documentation for more help in development.";
+  $output['@name']    = INSTALL_MODULE_NAME;
+  drupal_set_message( t( "!welcome", $output ) );
+}
+
+/**
+ * Hook Disable
+ */
+function noaa_weather_disable() {
+  //Provide a pleasant message when disabling the module.
+  $output['!goodbye'] = "@name Module sucessfully disabled.";
+  $output['@name']    = INSTALL_MODULE_NAME;
+  drupal_set_message( t( "!goodbye", $output ) );
+}
+
+/**
+ * Hook install
+ */
+function noaa_weather_install() {
+  //Check the default file directory for custom icons, if it is not there than create the directory, or if the permissions are broken, correct them.
+  $noaa_weather_custom_icons_directory = file_create_path() .'/noaa_weather_custom_icons';
+  file_check_directory( $noaa_weather_custom_icons_directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS );
+}
+
+/**
+ * Hook uninstall
+ */
+function noaa_weather_uninstall() {
+  //Delete module variables.
+  variable_del('noaaweather_current_station');
+  variable_del('noaaweather_forecast_lat');
+  variable_del('noaaweather_forecast_lon');
+  variable_del('noaaweather_forecast_days');
+  variable_del('noaaweather_radar_station');
+  variable_del('noaa_current');
+  variable_del('noaa_farecast');
+  variable_del('noaaweather_current_radar_ts');
+  //Clear all caches upon uninstall.
+  cache_clear_all('*', 'cache', TRUE);
+  cache_clear_all('*', 'cache_filter', TRUE);
+  cache_clear_all('*', 'cache_menu', TRUE);
+  cache_clear_all('*', 'cache_page', TRUE);
+  //Remove the NOAA Weather cache tables
+  drupal_uninstall_schema('cache_noaa_weather');
+  //Provide a pleasant message when uninstalling the module.
+  $output['!goodbye'] = "@name Module sucessfully uninstalled, your content has not been deleted.";
+  $output['@name']    = INSTALL_MODULE_NAME;
+  drupal_set_message( t( "!goodbye", $output ) );
+}
+
+/**
+ * Implementation of hook_schema
+ * @internal This is to add cache tables that we can use in the future, so we can cache the data to a table, rather than just a variable
+ */
+function noaa_weather_schema() {
+  //Install the cache tables for this module.
+  $schema['cache_noaa_weather'] = drupal_get_schema_unprocessed( 'system', 'cache' );
+  return $schema;
+}
