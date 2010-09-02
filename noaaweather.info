@@ -1,0 +1,7 @@
+; $Id$
+name = NOAA Weather
+description = Drupal integration of the NOAA Weather
+package = Weather
+version = "5.x-1.0"
+project = "noaaweather"
+

@@ -1,0 +1,107 @@
+<?php
+// $Id: noaaweather.install,v 2.0 2010/04/26 22:57:19 sillyrabbit Exp $
+
+/**
+ * @file
+ */
+
+/*
+function noaaweather_install() {
+
+	switch ($GLOBALS['db_type']) 
+	{
+    	case 'mysqli':
+    	case 'mysql':
+	      	db_query("CREATE TABLE IF NOT EXISTS {noaaweather_station} (".
+	               "noaaweather_station_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,".
+	               "noaaweather_station_code VARCHAR(6),".
+	               "noaaweather_station_location VARCHAR(30) ,".
+	               "PRIMARY KEY(noaaweather_station_id))"
+	               );
+
+	        db_query("CREATE TABLE IF NOT EXISTS {noaaweather_point_forecast} (".
+	               "noaaweather_point_forecast_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,".
+	               "noaaweather_point_forecast_lat DECIMAL(10,6),".
+	               "noaaweather_point_forecast_lon DECIMAL(10,6),".
+	               "noaaweather_point_forecast_location VARCHAR(30) ,".
+	               "PRIMARY KEY(noaaweather_point_forecast_id))"
+	               );
+
+	        db_query("CREATE TABLE IF NOT EXISTS {noaaweather_radar_station} (".
+	               "noaaweather_radar_station_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,".
+	               "noaaweather_radar_station_code VARCHAR(6),".
+	               "noaaweather_radar_station_location VARCHAR(30) ,".
+	               "PRIMARY KEY(noaaweather_radar_station_id))"
+	               );
+               
+            $success = TRUE;
+      
+		break;
+
+		case 'pgsql':
+			
+			db_query("CREATE SEQUENCE noaaweather_stations_seq");
+			
+			db_query("CREATE TABLE {noaaweather_stations} ( ".
+        	"noaaweather_station_id INT NOT NULL PRIMARY KEY DEFAULT nextval('noaaweather_stations_seq'), ".
+        	"noaaweather_station_code VARCHAR(6) ,".
+            "noaaweather_station_location VARCHAR(30) "
+			);
+			
+			db_query("CREATE SEQUENCE noaaweather_stations_seq");
+			
+			db_query("CREATE TABLE {noaaweather_stations} ( ".
+        	"noaaweather_station_id INT NOT NULL PRIMARY KEY DEFAULT nextval('noaaweather_stations_seq'), ".
+        	"noaaweather_station_code VARCHAR(6) ,".
+            "noaaweather_station_location VARCHAR(30) "
+			);
+		    
+			$success = TRUE;
+      
+		break;
+		
+
+	}
+
+	if ($success)
+	{
+    	drupal_set_message(t('noaaweather tables installation successful.'));
+  	}
+  	else 
+  	{
+    	drupal_set_message(t('noaaweather table installation NOT successful.'), 'error');
+  	}
+}
+*/
+
+/**
+ * Implentation of hook_uninstall().
+ */
+function noaaweather_uninstall(){
+  // Delete tables.
+  if (db_table_exists('noaaweather_station')){
+    db_query('DROP TABLE {noaaweather_station}');
+  }
+  if (db_table_exists('noaaweather_point_forecast')){
+    db_query('DROP TABLE {noaaweather_point_forecast}');
+  }
+  if (db_table_exists('noaaweather_radar_station')){
+    db_query('DROP TABLE {noaaweather_radar_station}');
+  }
+
+  // Delete variables.
+  variable_del('noaaweather_current_station');
+  variable_del('noaaweather_forecast_lat');
+  variable_del('noaaweather_forecast_lon');
+  variable_del('noaaweather_forecast_days');
+  variable_del('noaaweather_radar_station');
+  variable_del('noaa_current');
+  variable_del('noaa_farecast');
+  variable_del('noaaweather_current_radar_ts');
+}
+
+
+
+
+
+

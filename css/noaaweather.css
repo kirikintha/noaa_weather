@@ -1,0 +1,103 @@
+#bkgrnd 
+{
+	background:#4d768d; 
+	height:460px; 
+	width:468px; 
+	position:relative; 
+	left:0px; 
+	top:0px;
+}
+#basemap, #image0, #image1, #image2, #image3, #image4, #image5, #image6, #image7, #image8, #image9 
+{
+	position:absolute; 
+	left:9px; 
+	top:9px;
+}
+#basemap img, #image0 img, #image1 img, #image2 img, #image3 img, #image4 img, #image5 img, #image6 img, #image7 img, #image8 img, #image img9, table.nav img, table.sector img 
+{
+	border-style:none;
+}
+#toggles 
+{
+	position:absolute; 
+	top:428px; 
+	left:62px; 
+	color:White;
+}
+#block-noaaweather-0 .content{
+	margin:0;
+	line-height:14px;
+	font-size:11px;
+}
+.noaa-current-updatedon{
+	font-size:9px;
+	font-weight:normal;
+}
+
+#noaa-current{
+	width:600px;
+	font-size:11px;
+	font-weight:normal;
+}
+.noaa-current-daystr{
+	background-color:#aabdcd;
+	font-size:11px;
+	font-weight:bolder;
+	padding:2px 3px;
+}
+.noaa-current-image{
+float:left;
+width:60px;
+margin:0 3px 3px 0;
+}
+
+.noaa-current-data{
+float:left;
+margin:0 3px 3px 0;
+}
+
+
+#noaa-forecast{
+ line-height:12px;
+}
+.noaa-forecast-day{
+	background-color:#dcdcdc;
+	margin:2px;
+	font-size:9px;
+	float:left;
+	height:120px
+}
+
+.noaa-forecast-day-12-f,
+.noaa-forecast-day-12-c,
+{
+	width:100px;
+}
+.noaa-forecast-day-12-b{
+	width:140px;
+}
+
+
+.noaa-forecast-day-24{
+	margin-left:2px;
+	border:solid 1px #000000;
+	font-size:9px;
+	float:left;
+}
+
+.noaa-forecast-day-24-f,
+.noaa-forecast-day-24-c,
+{
+	width:100px;
+}
+.noaa-forecast-day-24-b{
+	width:140px;
+}
+
+.noaa-forecast-dayformated{
+background-color:#aabdcd;
+text-align:center;
+font-size:11px;
+font-weight:bolder;
+padding:2px 0;
+}
