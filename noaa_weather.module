@@ -1,4 +1,22 @@
 <?php
+/**
+ * @name NOAA Weather 
+ * @category weather
+ * @copyright 2010 Blue Tent Marketing
+ * @author Daniel Bopely <dan@bluetent.com> - Originator of this great module!
+ * @author Paul T. Huntsberger <paul@bluetent.com> - Ported and expanded to Drupal 6.
+ * @package NOAA Weather
+ * @version 1.0-dev
+ *
+ * The NOAA Weather module for Drupal 6 is a port and re-write of the Drupal 5 module. This module allows the end user to have
+ * a set of blocks and an admin user interface for assigning weather station information for current forecasts, extended foredcasts and radar station information.
+ * 
+ * @todo - this still needs a good audit and code cleanup, and eventually will be able to add multiple stations (perhaps a max limit of 5 individual stations) and
+ * perhaps some ctools interface integration.
+ * @todo - Add a help section.
+ * @todo - Add developer documentation.
+ */
+
 //Global Module Definitions.
 define('NOAA_WEATHER_MODULE_PATH', drupal_get_path('module', 'noaa_weather'));
 define('NOAA_WEATHER_DEFAULT_IMAGE_DIRECTORY', NOAA_WEATHER_MODULE_PATH .'/images/default/');
@@ -110,6 +128,7 @@ function noaa_weather_menu(){
     'type'              => MENU_CALLBACK,
 		'access arguments'  => array('administer site configuration'),
   );
+  //@todo - these are not being used at this moment - reference noaa.inc for more information in the Module Callbacks section
 	$items['admin/settings/noaaweather/update/current_xml'] = array(
     'page callback'     => '_noaa_weather_get_current',
     'type'              => MENU_CALLBACK,
@@ -134,7 +153,7 @@ function noaa_weather_menu(){
  */
 function noaa_weather_theme() {
   //Theme blocks.
-  //Foreach block we have set in blocks, theme tha block
+  //Foreach block we have set in blocks, theme that block
   $blocks = variable_get('noaa_weather_blocks', NULL);
   foreach ($blocks as $value) {
 		$theme[$value['theme']] = array (

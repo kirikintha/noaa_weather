@@ -296,6 +296,9 @@ function _noaa_weather_radar_settings_submit($form_id, &$form_state) {
 
 //Icon Settings
 function _noaa_weather_icon_settings() {
+  //Add in msdropdown js, so this is stand alone
+  drupal_add_js( NOAA_WEATHER_MODULE_PATH. '/js/msdropdown/uncompressed.jquery.dd.js','module','header');
+  drupal_add_css( NOAA_WEATHER_MODULE_PATH. '/js/msdropdown/dd.css', 'module', 'all', false);
   //@todo - I would like to make these all part of a define() in another .inc file
 	$HELP = t('Please choose your custom directory first. After you have chosen your custom directory, you will be able to assign a custom icon to ecah NOAA default image, or reset it to the default image. After you finish assign images for each inidivual page, you must press "Save configuration" before you move to the next page.');
   $form['icons'] = array(

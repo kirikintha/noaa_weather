@@ -14,13 +14,13 @@ function _noaa_weather_get_radar_overlays($radar_station) {
   $radar_station = strtoupper($radar_station);
   //This is an array of radar overlays to be created
   $radar_overlays_array = array(
-    'Topo_Short.jpg'=>'http://radar.weather.gov/ridge/Overlays/Topo/Short/radarstation_Topo_Short.jpg',
-    'County_Short.gif'=>'http://radar.weather.gov/ridge/Overlays/County/Short/radarstation_County_Short.gif',
-    'Rivers_Short.gif'=>'http://radar.weather.gov/ridge/Overlays/Rivers/Short/radarstation_Rivers_Short.gif',
+    'Topo_Short.jpg'    =>'http://radar.weather.gov/ridge/Overlays/Topo/Short/radarstation_Topo_Short.jpg',
+    'County_Short.gif'  =>'http://radar.weather.gov/ridge/Overlays/County/Short/radarstation_County_Short.gif',
+    'Rivers_Short.gif'  =>'http://radar.weather.gov/ridge/Overlays/Rivers/Short/radarstation_Rivers_Short.gif',
     'Highways_Short.gif'=>'http://radar.weather.gov/ridge/Overlays/Highways/Short/radarstation_Highways_Short.gif',
-    'City_Short.gif'=>'http://radar.weather.gov/ridge/Overlays/Cities/Short/radarstation_City_Short.gif',
-    'Warnings_0.gif'=>'http://radar.weather.gov/ridge/Warnings/Short/radarstation_Warnings_0.gif',
-    'N0R_Legend_0.gif'=>'http://radar.weather.gov/ridge/Legend/N0R/radarstation_N0R_Legend_0.gif',
+    'City_Short.gif'    =>'http://radar.weather.gov/ridge/Overlays/Cities/Short/radarstation_City_Short.gif',
+    'Warnings_0.gif'    =>'http://radar.weather.gov/ridge/Warnings/Short/radarstation_Warnings_0.gif',
+    'N0R_Legend_0.gif'  =>'http://radar.weather.gov/ridge/Legend/N0R/radarstation_N0R_Legend_0.gif',
   );
   //Make a directory name
   $noaa_weather_radar_directory = file_directory_path().'/noaa_weather_radar/'.$radar_station;
@@ -250,5 +250,7 @@ function _noaa_weather_update_all_weather() {
   _noaa_weather_get_radar(NOAA_WEATHER_RADAR_STATION_DEFAULT);
   if ($_GET['destination']) {
     drupal_goto($_GET['destination']);
+    $MSG = t('All Weather data updated.');
+    drupal_set_message($MSG);
   }
 }
