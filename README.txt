@@ -2,6 +2,8 @@
 
 The NOAA Weather module is a set of theame-able blocks and administrative user interface that allows end-users to assign weather stations and radar installations and view those feeds from a widget, or Drupal block. Just install, follow the installation warning messages and you should be good to go!
 
+A note on "Forecasts" latitude and longitude, I'm not exactly sure how you find those via NOAA, so if you figure that out or have problems, then please add that documentation here for developers.
+
 ##How It works
 
 Collects feed information from NOAA and adds them as variables into Drupal's system table. You can preprocess and skin the blocks to your own needs.
