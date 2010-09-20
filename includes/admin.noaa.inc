@@ -132,10 +132,15 @@ function _noaa_weather_current_settings_submit($form_id, &$form_state) {
 function _noaa_weather_forecast_settings() {
 	//Point forecast main options
   //@todo - where do the lat and lon come from?
+  $instructions[] = t('1. Goto http://www.noaa.gov/ and search for your US location. Use the form City, State.');
+  $instructions[] = t('2. When you get your search results, click on the: "Detailed Point Forecast" map.');
+  $instructions[] = t('2a. After clicking on the map, you will see in the url: http://forecast.weather.gov/MapClick.php??lat=%num&long=%num');
+  $instructions[] = t('2b. Shorten these two coordinates to floating integers with two decimal places: Lat = %nn.%nn and Lon = %nn.%nn');
+  $instructions[] = t('3. Enter these two coordinates into the form. Save your changes.');
 	$form['point_forecast'] = array(
 		'#type'        => 'fieldset',
 		'#title'       => t('NOAA Weather Point Forecast Settings'),
-		'#description' => t('These are the settings for forecasts from NOAA.'),
+		'#description' => t('These are the settings for forecasts from NOAA. !instructions', array('!instructions' => theme('list', $instructions))),
 		'#weight'      => -50,
     '#group'       => 'point_forecast',
   );
