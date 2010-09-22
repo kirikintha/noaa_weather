@@ -2,7 +2,9 @@
 
 The NOAA Weather module is a set of theame-able blocks and administrative user interface that allows end-users to assign weather stations and radar installations and view those feeds from a widget, or Drupal block. Just install, follow the installation warning messages and you should be good to go!
 
-A note on "Forecasts" latitude and longitude, I'm not exactly sure how you find those via NOAA, so if you figure that out or have problems, then please add that documentation here for developers.
+A note on "Forecasts" latitude and longitude, you have to search the NOAA website and use the Point Forecast map to get your latitude and longitude.
+
+Also, for custom icons - you must load you icons into noaa_weather/images/custom/%my_folder_name and the module will automatically detect your custom icons BY FOLDER. If you just upload images into noaa_weather/images/custom/ then the module will not be able to scan the icons correctly, so you must have a sub-directory inside the "custom" directory.
 
 ##How It works
 
