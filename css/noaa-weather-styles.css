@@ -139,6 +139,11 @@ padding:2px 0;
 /**
  * Select Box with Images CSS
  */
+div.noaa-weather-pager-info {
+  color: #666;
+  text-align:right;
+}
+
 div.custom-icon-wrapper {
   float:left;
   width:48%;
