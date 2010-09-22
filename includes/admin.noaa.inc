@@ -321,6 +321,7 @@ function _noaa_weather_icon_settings() {
   //If we have folders in the custom icon directory, then we need to populate the icons
   $icon_select_list = '';
   $custom_icons     = file_scan_directory(NOAA_WEATHER_CUSTOM_IMAGE_DIRECTORY, '.jpg|.jpeg|.gif|.png|.bmp');
+  ksort($custom_icons);
   //krumo($custom_icons);
   //Choose you icon pack and set the icons
   if (!empty($custom_icons)) {
