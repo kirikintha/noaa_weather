@@ -356,9 +356,10 @@ function _noaa_weather_icon_settings() {
     //Sneaky paging gleened from: http://acquia.com/blog/sneaky-drupal-pagers
     $GLOBALS['pager_page_array'][] = isset($_GET['page']) ? $_GET['page'] : 0; //what page you are on
     $GLOBALS['pager_total'][]      = count($imageSets); // total number of pages
+    $MSG = '<div class="noaa-weather-pager-info description"><small>' .(t('You are viewing page @page of @pages pages.', array('@page' => ($_GET['page'] + 1),'@pages' => count($imageSets)))) .'</small></div>';
     //Form For Pager
     $form['icons']['pager'] = array(
-      '#value'  => theme('pager', NULL, $items_per_page),
+      '#value'  => theme('pager', NULL, $items_per_page) .$MSG,
       '#weight' => -49,
     );
     //Loop through sets, and only show the set based on the paging array

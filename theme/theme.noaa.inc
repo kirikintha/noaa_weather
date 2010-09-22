@@ -11,8 +11,9 @@ function template_preprocess_block_current_weather_default(&$vars) {
   //Return $widget variables to the template, then you can use the HTML as your wish.
   $vars['widget'] = variable_get('noaa_weather_current_conditions', NULL);
   //Convert Images from custom icons.
-  $image_key      = NOAA_WEATHER_DEFAULT_IMAGE_DIRECTORY .$vars['widget']['icon_url_name'];
+  $image_key      = NOAA_WEATHER_DEFAULT_IMAGE_DIRECTORY .'/' .$vars['widget']['icon_url_name'];
   $image_list     = variable_get('noaa_weather_icons_list', NULL);
+
   //Render the output of the image.
   $vars['widget']['icon_rendered'] = theme('image',$image_list[$image_key]);
   //Get the Hi/Low from the point forecast
@@ -34,13 +35,13 @@ function template_preprocess_block_forecast_default(&$vars) {
   //Go through each forecast day and render an individual widget - this presumes a five day forecast
   $image_list     = variable_get('noaa_weather_icons_list', NULL);
 	foreach ($vars['forecast'] as $forecast_day) {
-    $image_key = $forecast_day['conditions_icon1']       = NOAA_WEATHER_DEFAULT_IMAGE_DIRECTORY .$forecast_day['conditions_icon1'];
+    $image_key = $forecast_day['conditions_icon1']       = NOAA_WEATHER_DEFAULT_IMAGE_DIRECTORY .'/' .$forecast_day['conditions_icon1'];
     $forecast_day['conditions_icon1_rendered']            = theme('image',$image_list[$image_key]);
-    $image_key = $forecast_day['conditions_icon2']       = NOAA_WEATHER_DEFAULT_IMAGE_DIRECTORY .$forecast_day['conditions_icon2'];
+    $image_key = $forecast_day['conditions_icon2']       = NOAA_WEATHER_DEFAULT_IMAGE_DIRECTORY .'/' .$forecast_day['conditions_icon2'];
     $forecast_day['conditions_icon2_rendered']            = theme('image',$image_list[$image_key]);
-    $image_key = $forecast_day['local_conditions_icon1'] = NOAA_WEATHER_DEFAULT_IMAGE_DIRECTORY .$forecast_day['local_conditions_icon1'];
+    $image_key = $forecast_day['local_conditions_icon1'] = NOAA_WEATHER_DEFAULT_IMAGE_DIRECTORY .'/' .$forecast_day['local_conditions_icon1'];
     $forecast_day['local_conditions_icon1_rendered']      = theme('image',$image_list[$image_key]);
-    $image_key = $forecast_day['local_conditions_icon2'] = NOAA_WEATHER_DEFAULT_IMAGE_DIRECTORY .$forecast_day['local_conditions_icon2'];
+    $image_key = $forecast_day['local_conditions_icon2'] = NOAA_WEATHER_DEFAULT_IMAGE_DIRECTORY .'/' .$forecast_day['local_conditions_icon2'];
     $forecast_day['local_conditions_icon2_rendered']      = theme('image',$image_list[$image_key]);
     
     switch ($temp_unit) {
