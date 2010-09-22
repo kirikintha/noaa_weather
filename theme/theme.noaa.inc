@@ -15,6 +15,12 @@ function template_preprocess_block_current_weather_default(&$vars) {
   $image_list     = variable_get('noaa_weather_icons_list', NULL);
   //Render the output of the image.
   $vars['widget']['icon_rendered'] = theme('image',$image_list[$image_key]);
+  //Get the Hi/Low from the point forecast
+  $forecast = variable_get('noaa_weather_forecast',NULL);
+  if ($forecast && strtoupper($forecast[0]['period_name1']) == 'TODAY') {
+    $vars['widget']['temperature_max'] = t($forecast[0]['temperature_max']);
+    $vars['widget']['temperature_min'] = t($forecast[0]['temperature_min']);
+  }
 }
 
 //X-day Forecast

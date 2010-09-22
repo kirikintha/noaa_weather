@@ -77,7 +77,7 @@ function noaa_weather_install() {
   $noaa_weather_radar_directory = file_create_path() .'/noaa_weather_radar';
   file_check_directory( $noaa_weather_radar_directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS );
   //Check the default file directory for custom icons, if it is not there than create the directory, or if the permissions are broken, correct them.
-  $noaa_weather_custom_icons_directory = file_create_path() .'/noaa_weather_custom_icons';
+  $noaa_weather_custom_icons_directory = NOAA_WEATHER_MODULE_PATH .'/custom';
   file_check_directory( $noaa_weather_custom_icons_directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS );
   //Install the NOAA Cache Tables.
   drupal_install_schema('noaa_weather');

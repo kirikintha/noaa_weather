@@ -19,8 +19,8 @@
 
 //Global Module Definitions.
 define('NOAA_WEATHER_MODULE_PATH', drupal_get_path('module', 'noaa_weather'));
-define('NOAA_WEATHER_DEFAULT_IMAGE_DIRECTORY', NOAA_WEATHER_MODULE_PATH .'/images/default/');
-define('NOAA_WEATHER_CUSTOM_IMAGE_DIRECTORY', file_directory_path() .'/noaa_weather_custom_icons');
+define('NOAA_WEATHER_DEFAULT_IMAGE_DIRECTORY', NOAA_WEATHER_MODULE_PATH .'/images/default');
+define('NOAA_WEATHER_CUSTOM_IMAGE_DIRECTORY', NOAA_WEATHER_MODULE_PATH .'/images/custom');
 define('NOAA_WEATHER_RADAR_IMAGE_DIRECTORY', file_create_path() .'/noaa_weather_radar');
 
 //Internal Module Configuration.

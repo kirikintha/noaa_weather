@@ -301,6 +301,9 @@ function _noaa_weather_radar_settings_submit($form_id, &$form_state) {
 
 //Icon Settings
 function _noaa_weather_icon_settings() {
+  //Check the custom icon directory for the correct permissions.
+  $custom_dir = NOAA_WEATHER_CUSTOM_IMAGE_DIRECTORY;
+  file_check_directory($custom_dir, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS );
   //Add in msdropdown js, so this is stand alone
   drupal_add_js( NOAA_WEATHER_MODULE_PATH. '/js/msdropdown/uncompressed.jquery.dd.js','module','header');
   drupal_add_css( NOAA_WEATHER_MODULE_PATH. '/js/msdropdown/dd.css', 'module', 'all', false);
@@ -318,6 +321,7 @@ function _noaa_weather_icon_settings() {
   //If we have folders in the custom icon directory, then we need to populate the icons
   $icon_select_list = '';
   $custom_icons     = file_scan_directory(NOAA_WEATHER_CUSTOM_IMAGE_DIRECTORY, '.jpg|.jpeg|.gif|.png|.bmp');
+  krumo($custom_icons);
   //Choose you icon pack and set the icons
   if (!empty($custom_icons)) {
     $icons            = array('INIT' => t('Choose a custom icon'));
@@ -328,7 +332,7 @@ function _noaa_weather_icon_settings() {
       $replace = array('','');
       $dir     = str_replace($search, $replace, $file->filename);
       $icons[$dir][$file->filename] = $file->basename;
-      $directories[NOAA_WEATHER_DEFAULT_IMAGE_DIRECTORY .'/' .$dir] = $dir;
+      $directories[NOAA_WEATHER_CUSTOM_IMAGE_DIRECTORY .'/' .$dir] = $dir;
       $icon_select_list .= '<option value="'.$file->filename.'" title="'. url($file->filename).'" >' .$file->basename .'</option>';
     }
     //Make the form from the icon directory
@@ -343,7 +347,7 @@ function _noaa_weather_icon_settings() {
     );
   }
   //If we have icons, let us chose to customize them
-  if (variable_get('noaa_weather_icons_custom_directories', 'INIT') != 'INIT') {
+  if (variable_get('noaa_weather_icons_custom_directories', NULL) != 'INIT') {
     //Get the images from the noaaImages class, and turn them into form elements
     $defaultImages  = noaaImages::_defaultImages();
     $items_per_page = 20;
@@ -363,7 +367,7 @@ function _noaa_weather_icon_settings() {
       if ($GLOBALS['pager_page_array'][0] == $page ) {
         foreach ($set as $key => $value) {
           //Switch out images for their custom icon if we have one
-          $default_image = NOAA_WEATHER_DEFAULT_IMAGE_DIRECTORY .$value;
+          $default_image = NOAA_WEATHER_DEFAULT_IMAGE_DIRECTORY .'/' .$value;
           $image         = (image_get_info($image_list[$default_image])) ? $image_list[$default_image] : $default_image;
           if (image_get_info($image)) {
             //Put the default image in the select list as well
@@ -403,10 +407,12 @@ function _noaa_weather_icon_settings_validate($form_id, &$form_state){
       }
       variable_set('noaa_weather_icons_list', $images);
       //Return A friendly message, when we reset
-      $MSG = t('Images hve been reset to their defaults.');
+      $MSG = t('Images have been reset to their defaults.');
       drupal_set_message($MSG);
       break;
     default:
+      //Set the directory we are looking at.
+      variable_set('noaa_weather_icons_custom_directories', $form_state['values']['noaa_weather_icons_custom_directories']);
       //Set the noaa_weather_icons_list with the new values
       $image_list = variable_get('noaa_weather_icons_list', NULL);
       foreach ($image_list as $key => $value) {
@@ -427,7 +433,7 @@ function _noaa_weather_icon_settings_validate($form_id, &$form_state){
 }
 
 function _noaa_weather_icon_settings_submit($form_id, &$form_state){
-  //because Drupal sucks at redirecting forms with our hacked pagers, we need to get the paging info
+  //Because Drupal sucks at redirecting forms with our hacked pagers, we need to get the paging info.
   $query = '';
   if ($_GET['page']) { $query = 'page=' .$_GET['page']; }
   drupal_goto($_GET['q'],$query);
