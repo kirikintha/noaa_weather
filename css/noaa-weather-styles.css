@@ -167,3 +167,7 @@ div.custom-icon-wrapper img.original-image {
 .dd .ddTitle {
   height:75px !important;
 }
+
+.dd .ddChild a img {
+  max-height:70px;
+}
