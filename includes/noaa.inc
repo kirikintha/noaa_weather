@@ -121,11 +121,12 @@ function _noaa_weather_get_current_conditions($current_station) {
       'icon_url_name'
     );
     //loop all children of object root node
+    $current_condtions = variable_get('noaa_weather_current_conditions',array());
     foreach ($xml->children() as $child) {
       //extract namespace of child node
       $namespace = $child->getName();
       //look for match in $current_conditions_namespaces array. if found then add to $current_conditions array
-      if(in_array($namespace,$current_conditions_namespaces)) {
+      if(in_array($namespace,$current_conditions_namespaces) && !empty($child[0])) {
         $current_condtions[$namespace] = trim($child[0]);
       }
     }
@@ -140,7 +141,7 @@ function _noaa_weather_get_forecast($lat, $lon, $days) {
   //Set uri and send request to NOAA.
   $forecast = "http://www.weather.gov/forecasts/xml/SOAP_server/ndfdSOAPclientByDay.php?lat=$lat&lon=$lon&format=12+hourly&startDate=&numDays=$days&Submit=Submit";
   $xml      = simplexml_load_file($forecast);
-  $extended = array();
+  $extended = variable_get('noaa_weather_forecast',array());
   //If we have a valid object, run our forecast
   if (!is_object($xml)) {
     watchdog('noaa_weather', t('NOAA Weather Extended Forecast failed to load!'), WATCHDOG_ERROR, NULL); 
@@ -177,15 +178,20 @@ function _noaa_weather_get_forecast($lat, $lon, $days) {
     //Max daily temp.
     $max_temp_array = $parameters->temperature[0]->value;
     $maxi           = 0;
-    foreach ($max_temp_array as $max_temp) {  
-      $extended[$maxi][ 'temperature_max' ] = trim($max_temp);  
+    foreach ($max_temp_array as $max_temp) {
+      if (!empty($max_temp)) {
+        $extended[$maxi]['temperature_max'] = trim($max_temp);  
+      }
+
       $maxi++;
     }
     //Min daily temp.
     $min_temp_array = $parameters->temperature[1]->value;
     $mini           =0 ;
-    foreach ($min_temp_array as $min_temp) {  
-      $extended[$mini][ 'temperature_min' ] = trim($min_temp);  
+    foreach ($min_temp_array as $min_temp) {
+      if (!empty($min_temp)) {
+        $extended[$mini]['temperature_min'] = trim($min_temp);  
+      }
       $mini++;
     }
     //Probability of percipitation.s
