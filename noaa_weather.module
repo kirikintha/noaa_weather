@@ -39,8 +39,8 @@ define ('NOAA_WEATHER_FORECAST_DAYS_DEFAULT', variable_get('noaa_weather_forecas
 define ('NOAA_WEATHER_FORECAST_DAYSPAN_DEFAULT', variable_get('noaa_weather_forecast_dayspan_default', 12));
 define ('NOAA_WEATHER_FORECAST_TEMP_UNIT_DEFAULT', variable_get('noaa_weather_forecast_temp_unit_default', 'f'));
 define ('NOAA_WEATHER_RADAR_STATION_DEFAULT', variable_get('noaa_weather_radar_station_default', 'INIT'));
-define ('NOAA_WEATHER_RADAR_PICTURE_WIDTH_DEFAULT', variable_get('noaa_weather_radar_picture_width_default', 600));
-define ('NOAA_WEATHER_RADAR_PICTURE_HEIGHT_DEFAULT', variable_get('noaa_weather_radar_picture_height_default', 550));
+define ('NOAA_WEATHER_RADAR_WIDTH_DEFAULT', variable_get('noaa_weather_radar_picture_width_default', 600));
+define ('NOAA_WEATHER_RADAR_HEIGHT_DEFAULT', variable_get('noaa_weather_radar_picture_height_default', 550));
 
 /**
  * Implementation of hook_init().
