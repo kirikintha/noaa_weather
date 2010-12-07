@@ -281,7 +281,7 @@ function _noaa_weather_radar_settings() {
   );
   //Enable vertical tabs if installed.
   $form['#pre_render'][] = 'vertical_tabs_form_pre_render';
-	return system_settings_form( $form );
+  return system_settings_form( $form );
 }
 
 function _noaa_weather_radar_settings_validate($form_id, &$form_state) {
